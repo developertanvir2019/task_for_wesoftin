@@ -1,5 +1,5 @@
 import { createBrowserRouter } from "react-router-dom";
-import Error from "../Components/Error";
+import Error from "../Components/Error/Error";
 import Main from "../Layout/Main";
 import Home from "../Components/Home";
 import SingleProfile from "../Components/singleProfile";

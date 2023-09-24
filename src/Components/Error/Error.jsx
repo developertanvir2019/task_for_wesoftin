@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-// import("./Error.css");
+import("./Error.css");
 
 const Error = () => {
   return (
@@ -14,7 +14,6 @@ const Error = () => {
           page is not found
         </h3>
         <Link to={"/"} className="btn btn-secondary">
-          {" "}
           Go to home
         </Link>
       </div>
