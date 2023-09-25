@@ -11,8 +11,8 @@ const initialState = {
 //async thunk
 export const fetchUserProfiles = createAsyncThunk(
   "userProfiles/fetchUserProfiles",
-  async () => {
-    const userProfiles = await getUserProfiles();
+  async ({ limit, skip }) => {
+    const userProfiles = await getUserProfiles({ limit, skip });
     return userProfiles;
   }
 );

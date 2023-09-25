@@ -1,17 +1,21 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchUserProfiles } from "../features/userProfiles/userProfilesSlice";
 import Card from "./Card";
 import { Link } from "react-router-dom";
+import Pagination from "./Pagination";
 
 const Home = () => {
   const dispatch = useDispatch();
+  const [pageNumber, setPageNumber] = useState(1);
   const { userProfiles, isLoading, isError, error } = useSelector(
     (state) => state.userProfiles
   );
+  let limit = 12;
+  let skip = pageNumber * limit;
   useEffect(() => {
-    dispatch(fetchUserProfiles());
-  }, [dispatch]);
+    dispatch(fetchUserProfiles({ limit, skip }));
+  }, [dispatch, limit, skip, pageNumber]);
 
   let content;
 
@@ -28,11 +32,17 @@ const Home = () => {
     );
   if (!isLoading && isError)
     content = (
-      <div className="text-center text-red-400 font-semibold">{error}</div>
+      <div className="text-center text-red-400 font-semibold text-2xl mt-20">
+        {error}
+      </div>
     );
 
   if (!isError && !isLoading && userProfiles?.users?.length === 0) {
-    content = <div className="text-center">No videos found!</div>;
+    content = (
+      <div className="text-center font-semibold text-2xl mt-20">
+        No user found
+      </div>
+    );
   }
 
   if (!isError && !isLoading && userProfiles?.users?.length > 0) {
@@ -52,7 +62,17 @@ const Home = () => {
     );
   }
 
-  return <div className="my-5">{content}</div>;
+  return (
+    <div className="my-5">
+      {content}
+
+      {userProfiles?.users?.length && (
+        <div className="mt-10 ">
+          <Pagination pageNumber={pageNumber} setPageNumber={setPageNumber} />
+        </div>
+      )}
+    </div>
+  );
 };
 
 export default Home;
