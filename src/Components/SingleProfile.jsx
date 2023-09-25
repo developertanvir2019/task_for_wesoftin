@@ -2,12 +2,13 @@ import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchSingleUser } from "../features/singleUser/singleUserSlice";
 import { useParams } from "react-router-dom";
+import ProfileCard from "./profileCard/ProfileCard";
 
 const SingleProfile = () => {
   const { id } = useParams();
   console.log(id);
   const dispatch = useDispatch();
-  const { singleUser, isLoading, isError, error } = useSelector(
+  const { singleUser, isLoading, isError } = useSelector(
     (state) => state.singleUser
   );
   useEffect(() => {
@@ -29,15 +30,21 @@ const SingleProfile = () => {
     );
   if (!isLoading && isError)
     content = (
-      <div className="text-center text-red-400 font-semibold">{error}</div>
+      <div className="text-center text-red-400 font-semibold text-lg mt-12">
+        No User Found
+      </div>
     );
 
-  if (!isError && !isLoading && singleUser?.users?.length === 0) {
+  if (!isError && !isLoading && !singleUser) {
     content = <div className="text-center">No User found!</div>;
   }
 
-  if (!isError && !isLoading && singleUser?.users?.length > 0) {
-    content = <div>heijfo</div>;
+  if (!isError && !isLoading && singleUser) {
+    content = (
+      <>
+        <ProfileCard user={singleUser} />
+      </>
+    );
   }
 
   return <div>{content}</div>;

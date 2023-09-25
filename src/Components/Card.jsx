@@ -40,7 +40,7 @@ const Card = ({ user }) => {
           </div>
         </div>
         <div
-          className={`absolute inset-0 bg-green-500 bg-opacity-0 transition-opacity opacity-0 ${
+          className={`absolute inset-0 bg-pink-500 bg-opacity-0 transition-opacity opacity-0 ${
             hovered ? "group-hover:bg-opacity-90 opacity-100" : ""
           }`}
         >
