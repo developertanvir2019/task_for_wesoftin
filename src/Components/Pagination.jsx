@@ -17,7 +17,7 @@ const Pagination = ({ pageNumber, setPageNumber }) => {
   };
 
   return (
-    <div className="flex justify-center space-x-5 dark:text-gray-100">
+    <div className="flex justify-center space-x-4 dark:text-gray-100">
       <button
         title="previous"
         type="button"
